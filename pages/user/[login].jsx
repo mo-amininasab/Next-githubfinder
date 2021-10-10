@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
 import axios from 'axios';
 
 const UserDetails = ({ userDetails }) => {
@@ -20,6 +21,9 @@ const UserDetails = ({ userDetails }) => {
   } = userDetails;
   return (
     <Fragment>
+      <Head>
+        <title>{name}</title>
+      </Head>
       <div className="flex flex-col space-y-2">
         <Fragment>
           <section className="flex items-center space-x-3 mb-2">
@@ -33,7 +37,7 @@ const UserDetails = ({ userDetails }) => {
               {hireable ? (
                 <span className="fas fa-check text-success"></span>
               ) : (
-                <span className="fas fa-times-circle text-primary"></span>
+                <span className="fas fa-times-circle text-danger"></span>
               )}
             </h3>
           </section>
