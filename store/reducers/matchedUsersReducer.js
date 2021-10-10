@@ -11,7 +11,7 @@ const initialState = {
   data: {},
 };
 
-export default (state = initialState, { type, payload }) => {
+const matchedUsersReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case GET_USERS:
       return { ...state, loading: true, error: null };
@@ -29,3 +29,4 @@ export default (state = initialState, { type, payload }) => {
       return state;
   }
 };
+export default matchedUsersReducer;

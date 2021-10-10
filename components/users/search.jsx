@@ -10,7 +10,7 @@ import Alert from '../layout/alert';
 const Search = () => {
   const [term, setTerm] = useState('');
 
-  const { data, loading, error } = useSelector((state) => state.matchedUsers);
+  const { data } = useSelector((state) => state.matchedUsers);
   const { message, type } = useSelector((state) => state.alert);
   const dispatch = useDispatch();
 
