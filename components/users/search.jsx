@@ -1,24 +1,28 @@
-import React, { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
 
 const Search = () => {
   const [term, setTerm] = useState('');
-
-  const inputRef = useRef();
+  const [matchedUsers, setMatchedUsers] = useState([]);
 
   const ChangeHandler = (e) => {
-    
-    
+    setTerm(e.target.value);
   };
 
-  const SubmitHandler = (e) => {
+  const SubmitHandler = async (e) => {
     e.preventDefault();
-    
-    
+
+    const { data } = await axios.get(
+      `https://api.github.com/search/users?q=${term}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
+    );
+
+    setMatchedUsers(data.items)
   };
+  console.log(matchedUsers);
 
   const ClearHandler = () => {
-    
-    
+    setTerm('');
+    setMatchedUsers([]);
   };
 
   return (
@@ -34,7 +38,6 @@ const Search = () => {
           value={term}
           onChange={ChangeHandler}
           autoFocus
-          ref={inputRef}
         />
         <button
           type="submit"
