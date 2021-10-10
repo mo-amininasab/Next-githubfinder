@@ -2,11 +2,16 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
+import Spinner from '../layout/spinner';
 
 const Users = () => {
   const { data, loading, error } = useSelector((state) => state.matchedUsers);
 
-  console.log(data.items ? true : false);
+  if (loading) {
+    console.log('loading');
+    return <Spinner />
+  }
+  console.log('not loading');
 
   return (
     <div className="grid grid-cols-3 mt-6 gap-4">
