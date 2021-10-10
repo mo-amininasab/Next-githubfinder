@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { matchedUsersActionCreators } from '../../store/index';
+import {
+  matchedUsersActionCreators,
+  alertActionCreators,
+} from '../../store/index';
+
+import Alert from '../layout/alert';
 
 const Search = () => {
   const [term, setTerm] = useState('');
 
   const { data, loading, error } = useSelector((state) => state.matchedUsers);
+  const { message, type } = useSelector((state) => state.alert);
   const dispatch = useDispatch();
 
   const ChangeHandler = (e) => {
@@ -15,16 +21,29 @@ const Search = () => {
   const SubmitHandler = async (e) => {
     e.preventDefault();
 
+    if (term.trim() === '') {
+      dispatch(
+        alertActionCreators.showAlert('Pleas enter something.', 'WARNING')
+      );
+
+      setTimeout(() => {
+        dispatch(alertActionCreators.removerAlert());
+      }, 5000);
+      return;
+    }
+
     dispatch(matchedUsersActionCreators.getMatchedUsers(term));
   };
 
   const ClearHandler = () => {
     setTerm('');
+
+    dispatch(matchedUsersActionCreators.clearMatchedUsers());
   };
 
   return (
     <div className="flex flex-col space-y-4">
-      {/* {message.length > 0 && <Alert message="Please enter something." />} */}
+      {message && <Alert message="Please enter something." type={type} />}
 
       <form onSubmit={SubmitHandler} className="flex flex-col space-y-4">
         <input
@@ -43,11 +62,14 @@ const Search = () => {
           Search
         </button>
       </form>
-      {/* {'total_count' in data && data.total_count > 0 && ( */}
-      <button onClick={ClearHandler} className="bg-light py-1 px-2 rounded-sm">
-        Clear
-      </button>
-      {/* )} */}
+      {data?.total_count > 0 && (
+        <button
+          onClick={ClearHandler}
+          className="bg-light py-1 px-2 rounded-sm"
+        >
+          Clear
+        </button>
+      )}
     </div>
   );
 };

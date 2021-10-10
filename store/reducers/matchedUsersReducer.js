@@ -2,6 +2,7 @@ import {
   GET_USERS,
   GET_USERS_SUCCESS,
   GET_USERS_ERROR,
+  CLEAR_USERS,
 } from '../constants/matchedUsersConstants';
 
 const initialState = {
@@ -20,6 +21,9 @@ export default (state = initialState, { type, payload }) => {
 
     case GET_USERS_ERROR:
       return { ...state, loading: false, error: payload };
+
+    case CLEAR_USERS:
+      return { ...state, data: {} };
 
     default:
       return state;

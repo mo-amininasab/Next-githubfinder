@@ -3,6 +3,7 @@ import {
   GET_USERS,
   GET_USERS_ERROR,
   GET_USERS_SUCCESS,
+  CLEAR_USERS,
 } from '../constants/matchedUsersConstants';
 
 export const getMatchedUsers = (term) => async (dispatch) => {
@@ -18,4 +19,10 @@ export const getMatchedUsers = (term) => async (dispatch) => {
     dispatch({ type: GET_USERS_ERROR, payload: error });
     console.log(error);
   }
+};
+
+export const clearMatchedUsers = () => {
+  return {
+    type: CLEAR_USERS,
+  };
 };
