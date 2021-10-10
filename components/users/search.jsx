@@ -1,9 +1,12 @@
-import axios from 'axios';
 import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { matchedUsersActionCreators } from '../../store/index';
 
 const Search = () => {
   const [term, setTerm] = useState('');
-  const [matchedUsers, setMatchedUsers] = useState([]);
+
+  const { data, loading, error } = useSelector((state) => state.matchedUsers);
+  const dispatch = useDispatch();
 
   const ChangeHandler = (e) => {
     setTerm(e.target.value);
@@ -12,17 +15,11 @@ const Search = () => {
   const SubmitHandler = async (e) => {
     e.preventDefault();
 
-    const { data } = await axios.get(
-      `https://api.github.com/search/users?q=${term}&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
-    );
-
-    setMatchedUsers(data.items)
+    dispatch(matchedUsersActionCreators.getMatchedUsers(term));
   };
-  console.log(matchedUsers);
 
   const ClearHandler = () => {
     setTerm('');
-    setMatchedUsers([]);
   };
 
   return (

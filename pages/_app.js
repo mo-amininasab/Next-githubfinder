@@ -1,6 +1,9 @@
 import React, { Fragment } from 'react';
 import Head from 'next/head';
 
+import store from '../store/store';
+import { Provider } from 'react-redux';
+
 import '../styles/globals.css';
 
 import Navbar from '../components/layout/navbar';
@@ -20,7 +23,9 @@ function MyApp({ Component, pageProps }) {
       <Navbar />
       {/* // Todo: insert a layout instead div */}
       <div className="mx-auto w-11/12 md:w-3/4 mt-6 mb-12">
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       </div>
     </Fragment>
   );
