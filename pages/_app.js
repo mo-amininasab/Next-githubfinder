@@ -18,6 +18,7 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       <Navbar />
+      {/* // Todo: insert a layout instead div */}
       <div className="mx-auto w-11/12 md:w-3/4 mt-6 mb-12">
         <Component {...pageProps} />
       </div>
