@@ -43,7 +43,7 @@ const Search = () => {
 
   return (
     <div className="flex flex-col space-y-4">
-      {message && <Alert message="Please enter something." type={type} />}
+      {message && <Alert message={message} type={type} />}
 
       <form onSubmit={SubmitHandler} className="flex flex-col space-y-4">
         <input

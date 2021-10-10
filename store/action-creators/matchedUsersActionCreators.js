@@ -5,6 +5,7 @@ import {
   GET_USERS_SUCCESS,
   CLEAR_USERS,
 } from '../constants/matchedUsersConstants';
+import { SHOW_ALERT, REMOVE_ALERT } from '../constants/alertConstants';
 
 export const getMatchedUsers = (term) => async (dispatch) => {
   dispatch({ type: GET_USERS });
@@ -17,7 +18,15 @@ export const getMatchedUsers = (term) => async (dispatch) => {
     dispatch({ type: GET_USERS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: GET_USERS_ERROR, payload: error });
-    console.log(error);
+    dispatch({
+      type: SHOW_ALERT,
+      payload: { message: error.message, type: 'ERROR' },
+    });
+
+    setTimeout(() => {
+      dispatch({ type: REMOVE_ALERT });
+    }, 5000);
+    console.error(error);
   }
 };
 
