@@ -3,6 +3,8 @@ import Head from 'next/head';
 
 import '../styles/globals.css';
 
+import Navbar from '../components/layout/navbar';
+
 function MyApp({ Component, pageProps }) {
   return (
     <Fragment>
@@ -15,7 +17,10 @@ function MyApp({ Component, pageProps }) {
           referrerpolicy="no-referrer"
         />
       </Head>
-      <Component {...pageProps} />
+      <Navbar />
+      <div className="mx-auto w-11/12 md:w-3/4 mt-6 mb-12">
+        <Component {...pageProps} />
+      </div>
     </Fragment>
   );
 }

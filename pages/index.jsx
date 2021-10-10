@@ -1,11 +1,12 @@
 import React from 'react'
-import Navbar from '../components/layout/navbar'
+import Search from '../components/users/search'
 
 const HomePage = () => {
+
   return (
     <div>
-      <Navbar />
-      hello
+      <Search />
+      
     </div>
   )
 }
