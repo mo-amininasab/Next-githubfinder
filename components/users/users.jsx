@@ -5,13 +5,11 @@ import { useSelector } from 'react-redux';
 import Spinner from '../layout/spinner';
 
 const Users = () => {
-  const { data, loading, error } = useSelector((state) => state.matchedUsers);
+  const { data, loading } = useSelector((state) => state.matchedUsers);
 
   if (loading) {
-    console.log('loading');
-    return <Spinner />
+    return <Spinner />;
   }
-  console.log('not loading');
 
   return (
     <div className="grid grid-cols-3 mt-6 gap-4">
